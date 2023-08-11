@@ -188,3 +188,42 @@ void Library::updateBookRating(const std::string& title, double newRating) {
         }
     }
 }
+
+void Library::removeItem(const std::string& title) {
+
+    /* remove-if takes three parameters, the last one being known as a predicate function.
+    In this case, I used a lambda function, making the capture clause take title as its parameter
+    because it is being used to compare to the titles of books within the book_library vector. */
+    auto iterator = std::remove_if(book_library.begin(), book_library.end(),
+        [&title](const Book& book) {
+
+            /*If it returns true, remove_if "moves" the element in a way that makes the process of
+            removing the element more effective. Basically, moving the book at the end of the vector.
+            */
+            return book.getTitle() == title;
+        });
+
+    /*True when iterator is within the range of elements and not the position after the last element.
+    If true, erase elements starting from iterator until, but not including, the position after the vector.*/
+    if (iterator != book_library.end()) {
+        book_library.erase(iterator, book_library.end());
+        std::cout << "Removed book with title: " << title << std::endl;
+    }
+    else {
+        std::cout << "Book with title '" << title << "' not found." << std::endl;
+    }
+
+    auto game_iterator = std::remove_if(game_library.begin(), game_library.end(),
+        [&title](const Game& game) {
+
+            return game.getTitle() == title;
+        });
+
+    if (game_iterator != game_library.end()) {
+        game_library.erase(game_iterator, game_library.end());
+        std::cout << "Removed game with title: " << title << std::endl;
+    }
+    else {
+        std::cout << "Game with title '" << title << "' not found." << std::endl;
+    }
+}

@@ -46,8 +46,11 @@ int main() {
     library.updateBookCompletionStatus("title3", true);
     library.updateBookRating("title3", 9);
 
+    library.removeItem("title1");
+    library.removeItem("Spirit Tracks");
     //ln2.displayBook();
     library.displayAllBooks();
+    library.displayAllGames();
     //library.displayBooksByAscendingRating();
     //library.displayBooksByDescendingRating();
 

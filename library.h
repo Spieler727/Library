@@ -41,6 +41,8 @@ public:
     void displayBooksByAscendingRating() const;
     void displayBooksByDescendingRating() const;
 
+    void removeItem(const std::string& title);
+
 private:
     std::vector<Game> game_library;
     std::vector<Book> book_library;
